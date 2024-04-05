@@ -67,6 +67,13 @@ button {
   border-radius: 8px;
 }
 
+.userList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 24px;
+}
+
 .userItem {
   border: 1px solid #808080;
   width: 360px;
@@ -96,6 +103,7 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  text-align: center;
 }
 
 h3 {

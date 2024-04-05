@@ -26,24 +26,45 @@ form.addEventListener('submit', e => {
       waitingText.setAttribute('hidden', 'hidden');
       return response.json();
     })
-    .then(users => {
-      if (users.total === 0) {
+    .then(response => {
+      if (response.total === 0) {
         iziToast.error({
           position: 'topRight',
           message:
             'Sorry, there are no images matching your search query. Please try again!',
         });
       } else {
-        const markup = users
-          .map(user => {
-            return `<li>
-
-                  </li>`;
+        const pictures = response.hits;
+        const markup = pictures
+          .map(picture => {
+            return `<li class="userItem">
+            <a href="#"
+              ><img class="mini_photo" src="${picture.webformatURL}" alt="${picture.tags}"
+            /></a>
+            <a hidden href="#"><img src="${picture.largeImageURL}" alt="${picture.tags}" /></a>
+            <ul class="counter">
+              <li class="counter_wrapper">
+                <h3 class="likes">Likes</h3>
+                <p class="likes_amount">${picture.likes}</p>
+              </li>
+              <li class="counter_wrapper">
+                <h3 class="views">Views</h3>
+                <p class="views_amount">${picture.views}</p>
+              </li>
+              <li class="counter_wrapper">
+                <h3 class="comments">Comments</h3>
+                <p class="comments_amount">${picture.comments}</p>
+              </li>
+              <li class="counter_wrapper">
+                <h3 class="downloads">Downloads</h3>
+                <p class="downloads_amount">${picture.downloads}</p>
+              </li>
+            </ul>
+          </li>`;
           })
           .join('');
         userList.insertAdjacentHTML('beforeend', markup);
       }
-      console.log(users);
     })
     .catch(error => console.log(error));
 });
