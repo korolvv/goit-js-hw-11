@@ -5,12 +5,13 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import 'izitoast/dist/css/iziToast.min.css';
 
 const form = document.querySelector('form');
-const waitingText = document.querySelector('.waitingText');
+const loader = document.querySelector('.loader');
 const userList = document.querySelector('.userList');
 
 form.addEventListener('submit', e => {
-  waitingText.removeAttribute('hidden');
   e.preventDefault();
+  userList.innerHTML = '';
+  loader.style.display = 'inline-block';
   const searchParams = new URLSearchParams({
     key: '43243729-04275528cc78ca8d3cba6ce95',
     q: form.elements.request.value,
@@ -23,7 +24,7 @@ form.addEventListener('submit', e => {
       if (!response.ok) {
         throw new Error(response.status);
       }
-      waitingText.setAttribute('hidden', 'hidden');
+      loader.style.display = 'none';
       return response.json();
     })
     .then(response => {
@@ -38,10 +39,9 @@ form.addEventListener('submit', e => {
         const markup = pictures
           .map(picture => {
             return `<li class="userItem">
-            <a href="#"
+            <a class='link_photo' href="${picture.largeImageURL}"
               ><img class="mini_photo" src="${picture.webformatURL}" alt="${picture.tags}"
             /></a>
-            <a hidden href="#"><img src="${picture.largeImageURL}" alt="${picture.tags}" /></a>
             <ul class="counter">
               <li class="counter_wrapper">
                 <h3 class="likes">Likes</h3>
@@ -64,6 +64,8 @@ form.addEventListener('submit', e => {
           })
           .join('');
         userList.insertAdjacentHTML('beforeend', markup);
+        const lightbox = new SimpleLightbox('.userItem a');
+        lightbox.refresh();
       }
     })
     .catch(error => console.log(error));

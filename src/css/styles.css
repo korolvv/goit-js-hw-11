@@ -7,9 +7,10 @@
 @import url('./reset.css');
 @import url('./vite-promo.css');
 @import url('./header.css');
-
+@import url('./loader.css');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400..700&display=swap');
-root {
+
+:root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
@@ -36,9 +37,6 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-}
-.waitingText {
-  color: #2e2f42;
 }
 
 form {
@@ -67,27 +65,21 @@ button {
   border-radius: 8px;
 }
 
+.mini_photo {
+  width: 100%;
+  height: 240px;
+}
+
 .userList {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto;
+  display: flex;
   gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .userItem {
   border: 1px solid #808080;
   width: 360px;
-  height: 200px;
-}
-
-img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.mini_photo {
-  max-height: 152px;
 }
 
 .counter {
@@ -96,13 +88,9 @@ img {
   display: flex;
   gap: 28px;
   justify-content: space-between;
-  height: 46px;
 }
 
 .counter_wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   text-align: center;
 }
 
@@ -110,6 +98,7 @@ h3 {
   font-weight: 600;
   font-size: 12px;
   color: #2e2f42;
+  margin-bottom: 5px;
 }
 
 p {
