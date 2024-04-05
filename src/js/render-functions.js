@@ -3,7 +3,7 @@ function renderItem(array) {
     .map(item => {
       return `<li class="userItem">
             <a class='link_photo' href="${item.largeImageURL}"
-              ><img class="mini_photo" src="${item.webformatURL}" alt="${item.tags}"
+              ><img class="mini_photo" src="${item.webformatURL}" alt="${item.tags}" title="${item.tags}"
             /></a>
             <ul class="counter">
               <li class="counter_wrapper">
